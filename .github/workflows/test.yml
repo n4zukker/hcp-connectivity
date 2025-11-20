@@ -2,8 +2,8 @@ on:
   repository_dispatch:
 
 jobs:
-  runs-on: ubuntu-latest
   example_matrix:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         x:
