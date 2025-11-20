@@ -20,4 +20,9 @@ jobs:
     steps:
       - shell: bash
         run: |
-          curl --verbose --timeout 5 https://secrets.kyndryl.net
+          set -o errexit
+          set -x
+          for x in { 1 .. 20 } ; do
+            curl --verbose --connect-timeout 5 https://secrets.kyndryl.net
+            sleep 5s
+          done
