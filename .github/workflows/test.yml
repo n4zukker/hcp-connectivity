@@ -2,6 +2,7 @@ on:
   repository_dispatch:
 
 jobs:
+  runs-on: ubuntu-latest
   example_matrix:
     strategy:
       matrix:
