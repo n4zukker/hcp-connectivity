@@ -33,6 +33,6 @@ jobs:
             sudo apt install traceroute
             dig +short secrets.kyndryl.net
             traceroute secrets.kyndryl.net
-            traceroute --max-hops=60 --tcp --port=443 secrets.kyndryl.net
+            sudo traceroute --max-hops=60 --tcp --port=443 secrets.kyndryl.net
           fi
           exit "${rc}"
