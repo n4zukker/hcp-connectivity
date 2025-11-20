@@ -38,6 +38,7 @@ jobs:
             dig +short secrets.kyndryl.net
             traceroute --max-hops=60 secrets.kyndryl.net
             sudo traceroute --max-hops=60 --tcp --port=443 secrets.kyndryl.net
+            echo "::error title=Connectivity error::rc=${rc}, ip=$(dig +short myip.opendns.com @resolver1.opendns.com)"
           fi
           echo "::notice::rc=${rc}, ip=$(dig +short myip.opendns.com @resolver1.opendns.com)"
           exit "${rc}"
