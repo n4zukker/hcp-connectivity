@@ -39,4 +39,5 @@ jobs:
             traceroute --max-hops=60 secrets.kyndryl.net
             sudo traceroute --max-hops=60 --tcp --port=443 secrets.kyndryl.net
           fi
+          echo "::notice::rc=${rc}, ip=$(curl --silent ipinfo.io | jq .ip)"
           exit "${rc}"
