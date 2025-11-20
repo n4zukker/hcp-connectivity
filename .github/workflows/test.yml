@@ -34,7 +34,7 @@ jobs:
             sudo apt-get install --quiet=2 traceroute
             hostname
             /usr/sbin/ifconfig
-            curl --silent ipinfo.io/ip | jq .
+            curl --silent ipinfo.io/ip
             dig +short myip.opendns.com @resolver1.opendns.com
             dig +short secrets.kyndryl.net
             traceroute secrets.kyndryl.net
