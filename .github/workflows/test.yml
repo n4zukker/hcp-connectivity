@@ -20,9 +20,19 @@ jobs:
     steps:
       - shell: bash
         run: |
-          set -o errexit
+
+      - shell: bash
+        env:
+          GITHUB: ${{ tojson(github) }}
+        run: |
           set -x
-          for x in { 1 .. 10 } ; do
-            curl --verbose --connect-timeout 5 https://secrets.kyndryl.net
-            sleep 5s
-          done
+          jq . <<<"${GITHUB}"
+          rc='0'
+          curl --verbose --connect-timeout 5 https://secrets.kyndryl.net/v1/sys/health || rc="$?"
+          if [ "${rc}" -ne '0' ]; then
+            sudo apt install traceroute
+            dig +short secrets.kyndryl.net
+            traceroute secrets.kyndryl.net
+            traceroute --max-hops=60 --tcp --port=443 secrets.kyndryl.net
+          fi
+          exit "${rc}"
