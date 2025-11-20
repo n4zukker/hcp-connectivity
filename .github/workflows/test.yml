@@ -1,0 +1,20 @@
+on:
+  repository_dispatch:
+
+jobs:
+  example_matrix:
+    strategy:
+      matrix:
+        x:
+         - 1
+#         - 2
+#         - 3
+#         - 4
+#         - 5
+#        y: [1, 2, 3, 4, 5]
+#        z: [1, 2, 3, 4, 5]
+
+    steps:
+      - shell: bash
+        run: |
+          curl --verbose --timeout 5 https://secrets.kyndryl.net
