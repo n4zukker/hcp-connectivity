@@ -10,11 +10,11 @@ jobs:
       matrix:
         x:
          - 1
-#         - 2
-#         - 3
-#         - 4
-#         - 5
-#        y: [1, 2, 3, 4, 5]
+         - 2
+         - 3
+         - 4
+         - 5
+        y: [1, 2, 3, 4, 5]
 #        z: [1, 2, 3, 4, 5]
 
     steps:
@@ -22,7 +22,7 @@ jobs:
         run: |
           set -o errexit
           set -x
-          for x in { 1 .. 20 } ; do
+          for x in { 1 .. 10 } ; do
             curl --verbose --connect-timeout 5 https://secrets.kyndryl.net
             sleep 5s
           done
