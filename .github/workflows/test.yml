@@ -34,8 +34,11 @@ jobs:
             hostname
             /usr/sbin/ifconfig
             curl --silent ipinfo.io | jq .
+            getent hosts secrets.kyndryl.net
             dig +short myip.opendns.com @resolver1.opendns.com
             dig +short secrets.kyndryl.net
+            dig secrets.kyndryl.net @8.8.8.8
+            dig secrets.kyndryl.net @1.1.1.1
             traceroute --max-hops=60 secrets.kyndryl.net
             sudo traceroute --max-hops=60 --tcp --port=443 secrets.kyndryl.net
             echo "::error title=Connectivity error::rc=${rc}, ip=$(dig +short myip.opendns.com @resolver1.opendns.com)"
