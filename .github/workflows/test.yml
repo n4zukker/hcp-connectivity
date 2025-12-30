@@ -28,11 +28,11 @@ jobs:
         run: |
           set -x
           set +e
+          sudo DEBIAN_FRONTEND=noninteractive apt-get --quiet=2 install traceroute
           sudo traceroute --max-hops=60 --tcp --port=443 secrets.kyndryl.net
           rc='0'
           curl --verbose --connect-timeout 5 https://secrets.kyndryl.net/v1/sys/health || rc="$?"
           if [ "${rc}" -ne '0' ]; then
-            sudo DEBIAN_FRONTEND=noninteractive apt-get --quiet=2 install traceroute
             hostname
             /usr/sbin/ifconfig
             curl --silent ipinfo.io | jq .
