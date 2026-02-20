@@ -31,8 +31,9 @@ jobs:
           rc='0'
           curl --verbose --connect-timeout 5 https://secrets.kyndryl.net/v1/sys/health || rc="$?"
           if [ "${rc}" -ne '0' ]; then
-            sudo DEBIAN_FRONTEND=noninteractive apt-get --quiet=2 install traceroute
+            sudo DEBIAN_FRONTEND=noninteractive apt-get --quiet=2 install traceroute mtr
             sudo traceroute --max-hops=60 --tcp --port=443 secrets.kyndryl.net
+            sudo mtr --report-wide --report-cycles 5 --tcp --port=443 secrets.kyndryl.net
             hostname
             /usr/sbin/ifconfig
             curl --silent ipinfo.io | jq .
